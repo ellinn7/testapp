@@ -11,7 +11,8 @@
 			<xsd:sequence>
 				<xsd:element name="dateStart" type="xsd:date"/>
 				<xsd:element name="dateEnd" type="xsd:date"/>
-				<xsd:element name="outputFormat" minOccurs="0" default="html">
+                                <xsd:element name="displayName" type="xsd:string"/>
+				<xsd:element name="outputFormat" default="html">
 					<xsd:simpleType>
 						<xsd:restriction base="xsd:string">
 							<xsd:enumeration value="html"/>

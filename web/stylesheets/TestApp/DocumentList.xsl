@@ -47,8 +47,21 @@
 						по
 						<input size="10" type="text" name="dateEnd-0" value="{$req/req:dateEnd}"/>
 					</label>
-				</div>
+                                </div>
+                                <div>
+                                        <label>
+						Наименование содержит слова
+						<input size="100" type="text" name="displayName-0" value="{$req/req:displayName}"/>
+					</label>
+                                </div>
 				<div>
+                                        <label>
+						Формат вывода
+                                                <select name="outputFormat-0">
+                                                    <option value='html'>html</option>
+                                                    <option value='pdf'>pdf</option>
+                                                </select>
+					</label> 
 					<button  type="submit">Отправить</button>
 				</div>
 			</fieldset>
@@ -59,10 +72,16 @@
 					Документы с
 					<xsl:value-of select="req:DocumentListRequest/req:dateStart"/> по
 					<xsl:value-of select="req:DocumentListRequest/req:dateEnd"/>
+                                        <xsl:if test="req:DocumentListRequest/req:displayName!=''">
+                                            , название содержит " 
+                                            <xsl:value-of select="req:DocumentListRequest/req:displayName"/>"
+                                        </xsl:if>
 				</caption>
 				<tr>
 					<th>Дата</th>
 					<th>Наименование</th>
+					<th>Удален</th>
+					<th>Ключевые слова</th>
 				</tr>
 				<xsl:for-each select="obj:Document">
 					<tr>
@@ -74,6 +93,17 @@
 								<xsl:value-of select="obj:displayName"/>
 							</a>
 						</td>
+                                                <td>
+                                                        <xsl:if test="obj:deleted='true'">
+                                                            да
+                                                        </xsl:if>
+                                                        <xsl:if test="obj:deleted='false'">
+                                                            нет
+                                                        </xsl:if>
+                                                </td>
+                                                <td>
+                                                        <xsl:value-of select="obj:keywords"/>
+                                                </td>
 					</tr>
 				</xsl:for-each>
 			</table>
